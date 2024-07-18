@@ -1,4 +1,3 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 import 'widgets/custom_textformfield.dart';
@@ -11,6 +10,7 @@ class RegisterPage extends StatelessWidget {
 final formKey = GlobalKey<FormState>();
 final correoController = TextEditingController();
 final contraseniaController = TextEditingController();
+final confirmarContraseniaController = TextEditingController();
 final nombreController = TextEditingController();
 final telefonoController = TextEditingController();
   
@@ -57,7 +57,7 @@ final telefonoController = TextEditingController();
 
                       return null;
                     },
-                    controller: correoController,
+                    controller: nombreController,
                   ),
 
                   //Telefono
@@ -75,7 +75,7 @@ final telefonoController = TextEditingController();
                       if(value.length < 8 || value.length > 8){
                         return 'Teléfono inválido';
                       }
-                      if(!value.startsWith('3') || !value.startsWith('9')){
+                      if(!value.startsWith('3') && !value.startsWith('9')){
                         return 'Número de teléfono inválido';
                       }
 
@@ -96,10 +96,21 @@ final telefonoController = TextEditingController();
                       if(value == null || value.isEmpty){
                         return 'Correo requerido';
                       }
-                      if(!value.contains('@') || value.allMatches('@').length > 1){
+                      if(value.length < 11){
+                        return 'Dirección inválida';
+                      }
+                      if(value.contains(RegExp(r' ')) || value.contains(RegExp(r'[!#<>?":`~;[\]\\|=+)(*&^%]'))){
+                        return 'Correo inválido';
+                      }
+                      if(!value.contains('@')){
                         return 'Correo incorrecto';
                       }
 
+                      final List<String> parts = value.split('@');
+                      if(parts.length != 2){
+                        return 'Correo inválido';
+                      }
+                      
                       if(!value.contains('@unah.hn') || !value.endsWith('@unah.hn')){
                         return 'Dominio de correo incorrecto';                      
                       }
@@ -132,7 +143,7 @@ final telefonoController = TextEditingController();
                         return 'La contraseña debe contener al menos una mayúscula';
                       }
                       if(!value.contains(RegExp(r'.[!@#<>?":_`~;[\]\\|=+)(*&^%-]'))){
-                        return 'La contraseña debe contener al menos un caracter especial';
+                        return 'Debe contener un caracter especial';
                       }
                       
                       return null;
@@ -158,7 +169,7 @@ final telefonoController = TextEditingController();
                       }
                       return null;
                     },
-                    controller: contraseniaController,
+                    controller: confirmarContraseniaController,
                   ),
                   
                   //Botón iniciar sesión
@@ -171,8 +182,13 @@ final telefonoController = TextEditingController();
                           correo: correoController.text,
                           contrasenia: contraseniaController.text,
                         );
+                        const SnackBar(content: Text('Usuario registrado exitosamente'));
                         
-                        
+                        print('Nombre: ${datos.nombre}');
+                        print('Teléfono: ${datos.telefono}');
+                        print('Correo: ${datos.correo}');
+                        print('Contraseña: ${datos.contrasenia}');
+
                         
                       }
                       
