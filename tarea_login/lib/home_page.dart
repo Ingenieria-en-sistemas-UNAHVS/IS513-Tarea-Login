@@ -36,7 +36,7 @@ class HomePage extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     ListTile(
-                      title: Text('Bienvenido ${datos['nombre']}',style: TextStyle(fontSize: 25, color: Colors.blueAccent),),
+                      title: Text('Bienvenido ${datos['nombre']}',style: const TextStyle(fontSize: 25, color: Colors.blueAccent),),
                     ),
                     ListTile(
                       title: const Text('Correo:',style: TextStyle(fontSize: 25, color: Colors.black87),),

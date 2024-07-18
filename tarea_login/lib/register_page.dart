@@ -193,7 +193,7 @@ final telefonoController = TextEditingController();
                       }
                       
                     },
-                    child: Text('Registrarse', style: TextStyle(fontSize: 20)),
+                    child: const Text('Registrarse', style: TextStyle(fontSize: 20)),
                   ),
                 ],
               ),

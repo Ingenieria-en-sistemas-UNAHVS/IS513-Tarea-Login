@@ -95,7 +95,7 @@ final TextEditingController _contraseniaController = TextEditingController();
                       }
                       
                     },
-                    child: Text('Iniciar Sesión', style: TextStyle(fontSize: 20)),
+                    child: const Text('Iniciar Sesión', style: TextStyle(fontSize: 20)),
                   ),
           
                   //Botón Registrarse
@@ -105,7 +105,7 @@ final TextEditingController _contraseniaController = TextEditingController();
                       onPressed: (){
                         Navigator.of(context).pushNamed('/register');
                       }, 
-                      child: Text('Registrarse', style: TextStyle(fontSize: 20, color: Colors.black),),),
+                      child: const Text('Registrarse', style: TextStyle(fontSize: 20, color: Colors.black),),),
                   ),
                 ],
               ),
