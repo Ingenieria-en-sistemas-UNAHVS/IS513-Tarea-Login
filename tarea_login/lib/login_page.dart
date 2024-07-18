@@ -85,13 +85,13 @@ final TextEditingController _contraseniaController = TextEditingController();
                   ElevatedButton(
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {
-                        final UserClass datos = UserClass(
-                          nombre: 'Andres Leiva',
-                          telefono: '99999999',
-                          correo: _correoController.text,
-                          contrasenia: _contraseniaController.text,
-                        );
-                        Navigator.of(context).pushNamed('/home', arguments: datos);
+                        final datos = {
+                          'nombre': 'Andres Leiva',
+                          'telefono': '99999999',
+                          'correo': _correoController.text,
+                          'contrasenia': _contraseniaController.text,
+                        };
+                        Navigator.of(context).pushReplacementNamed('/home', arguments: datos);
                       }
                       
                     },

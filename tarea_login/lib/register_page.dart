@@ -110,7 +110,7 @@ final telefonoController = TextEditingController();
                       if(parts.length != 2){
                         return 'Correo inválido';
                       }
-                      
+
                       if(!value.contains('@unah.hn') || !value.endsWith('@unah.hn')){
                         return 'Dominio de correo incorrecto';                      
                       }
@@ -176,7 +176,7 @@ final telefonoController = TextEditingController();
                   ElevatedButton(
                     onPressed: () {
                       if (formKey.currentState!.validate()) {
-                        final UserClass datos = UserClass(
+                        final datos = UserClass(
                           nombre: nombreController.text,
                           telefono: telefonoController.text,
                           correo: correoController.text,

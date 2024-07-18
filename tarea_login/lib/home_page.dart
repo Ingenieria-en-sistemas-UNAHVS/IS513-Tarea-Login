@@ -24,23 +24,26 @@ class HomePage extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
               //Logo
-              SizedBox(
-                height: 200,
-                child: Image.asset('assets/images/unah.png'),
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 50.0),
+                child: SizedBox(
+                  height: 250,
+                  child: Image.asset('assets/images/unah.png'),
+                ),
               ),
-              //Boton de cerrar sesion
               Card(
-                child: ListView(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     ListTile(
                       title: Text('Bienvenido ${datos['nombre']}',style: TextStyle(fontSize: 25, color: Colors.blueAccent),),
                     ),
                     ListTile(
-                      title: const Text('Correo:',style: TextStyle(fontSize: 25, color: Colors.blueAccent),),
+                      title: const Text('Correo:',style: TextStyle(fontSize: 25, color: Colors.black87),),
                       subtitle: Text(datos['correo']),
                     ),
                     ListTile(
-                      title: const Text('Telefono:',style: TextStyle(fontSize: 25, color: Colors.blueAccent),),
+                      title: const Text('Telefono:',style: TextStyle(fontSize: 25, color: Colors.black87),),
                       subtitle: Text(datos['telefono']),
                     ),
                     
