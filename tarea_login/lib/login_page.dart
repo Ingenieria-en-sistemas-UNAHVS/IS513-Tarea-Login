@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:tarea_login/widgets/custom_textformfield.dart';
-import 'package:tarea_login/home_page.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({
@@ -12,7 +11,10 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+final TextEditingController _correoController = TextEditingController();
+final TextEditingController _contraseniaController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,13 +45,18 @@ class _LoginPageState extends State<LoginPage> {
                       labelText: 'Ingrese su correo',
                       keyboardType: TextInputType.emailAddress,
                       prefixIcon: Icons.email,
-                      allowEmpty: false
+                      //allowEmpty: false
                     ),
                     validator: (value){
-                      (value == 'andres.leiva@unah.hn') ? null : 'Correo inválido';
-          
+                      if(value == null || value.isEmpty){
+                        return 'Correo requerido';
+                      }
+                      if(value != 'andres.leiva@unah.hn'){
+                        return 'Correo incorrecto';                      }
+
                       return null;
                     },
+                    controller: _correoController,
                   ),
                   
                   //Contraseña
@@ -58,22 +65,33 @@ class _LoginPageState extends State<LoginPage> {
                       labelText: 'Ingrese su contraseña',
                       keyboardType: TextInputType.visiblePassword,
                       prefixIcon: Icons.lock,
-                      suffixIcon: Icons.visibility,
+                      //suffixIcon: Icons.visibility,
                       obscureText: true,
-                      allowEmpty: false
+                      //allowEmpty: false
                     ),
                     validator: (value){
-                      (value == '20212030272')? null : 'Contraseña incorrecta';
-          
+                      if(value == null || value.isEmpty){
+                        return 'Contraseña requerida';
+                      }
+                      if(value != '20212030272'){
+                        return 'Contraseña incorrecta';                      
+                        }
                       return null;
                     },
+                    controller: _contraseniaController,
                   ),
                   
                   //Botón iniciar sesión
                   ElevatedButton(
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {
-                        Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => const HomePage()));
+                        final UserClass datos = UserClass(
+                          nombre: 'Andres Leiva',
+                          telefono: '99999999',
+                          correo: _correoController.text,
+                          contrasenia: _contraseniaController.text,
+                        );
+                        Navigator.of(context).pushNamed('/home', arguments: datos);
                       }
                       
                     },
@@ -84,7 +102,9 @@ class _LoginPageState extends State<LoginPage> {
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 20),
                     child: TextButton(
-                      onPressed: (){}, 
+                      onPressed: (){
+                        Navigator.of(context).pushNamed('/register');
+                      }, 
                       child: Text('Registrarse', style: TextStyle(fontSize: 20, color: Colors.black),),),
                   ),
                 ],
