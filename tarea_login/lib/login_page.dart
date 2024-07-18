@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tarea_login/widgets/custom_textformfield.dart';
+import 'package:tarea_login/home_page.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({
@@ -23,37 +24,74 @@ class _LoginPageState extends State<LoginPage> {
         ),
         title: const Text('Inicio de Sesión'),
         ),
-      body: Form(
-        key: _formKey,
-        child: Center(
-          child: Column(
-            children: <Widget>[
-              CustomTextFormField(),
-              Padding(
-                padding: const EdgeInsets.all(20.0),
-                child: TextFormField(
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(),
-                    labelText: 'Ingrese su contraseña',
+      body: ListView(
+        children: [
+          Form(
+            key: _formKey,
+            child: Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  //Logo
+                  SizedBox(
+                    height: 200,
+                    child: Image.asset('assets/images/unah.png'),
                   ),
-                ),
-              ),
-              ElevatedButton(
-                onPressed: () {
-                  if (_formKey.currentState!.validate()) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                        content: Text('Validando información'),
-                      ),
-                    );
-                  }
+                  //Correo, debe ser el institucional
+                  CustomTextFormField(
+                    inputInfo: CustomTextFormClass(
+                      labelText: 'Ingrese su correo',
+                      keyboardType: TextInputType.emailAddress,
+                      prefixIcon: Icons.email,
+                      allowEmpty: false
+                    ),
+                    validator: (value){
+                      (value == 'andres.leiva@unah.hn') ? null : 'Correo inválido';
+          
+                      return null;
+                    },
+                  ),
                   
-                },
-                child: Text('Iniciar Sesión'),
+                  //Contraseña
+                  CustomTextFormField(
+                    inputInfo: CustomTextFormClass(
+                      labelText: 'Ingrese su contraseña',
+                      keyboardType: TextInputType.visiblePassword,
+                      prefixIcon: Icons.lock,
+                      suffixIcon: Icons.visibility,
+                      obscureText: true,
+                      allowEmpty: false
+                    ),
+                    validator: (value){
+                      (value == '20212030272')? null : 'Contraseña incorrecta';
+          
+                      return null;
+                    },
+                  ),
+                  
+                  //Botón iniciar sesión
+                  ElevatedButton(
+                    onPressed: () {
+                      if (_formKey.currentState!.validate()) {
+                        Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => const HomePage()));
+                      }
+                      
+                    },
+                    child: Text('Iniciar Sesión', style: TextStyle(fontSize: 20)),
+                  ),
+          
+                  //Botón Registrarse
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 20),
+                    child: TextButton(
+                      onPressed: (){}, 
+                      child: Text('Registrarse', style: TextStyle(fontSize: 20, color: Colors.black),),),
+                  ),
+                ],
               ),
-            ],
+            ),
           ),
-        ),
+        ],
       ),
     );
   }
